@@ -7,6 +7,11 @@ const ngoSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+
+    description:{
+        type :String,
+        required:true,
+    },
     email: {
         type: String,
         required: true,
@@ -34,51 +39,6 @@ const ngoSchema = new mongoose.Schema({
     ngoAddress: {
         type: String,
         required: true
-    },
-    ngoType: {
-        type: String,
-        enum: ["Orphanage", "Shelter", "Food Distribution", "Other"],
-        required: true
-    },
-    ngoWebsite: {
-        type: String,
-        required: false
-    },
-    foodTypesNeeded: {
-        type: [String], // Example: ["Fresh", "Cooked", "Packaged"]
-        required: true
-    },
-    preferredPickupHours: {
-        type: String,
-        required: true
-    },
-    preferredPickupLocation: {
-        type: String,
-        required: false
-    },
-    verificationDocument: {
-        type: String, // File path or URL of the uploaded document
-        required: true
-    },
-    additionalDocument: {
-        type: String, // Optional additional verification file
-        required: false
-    },
-    isVerified: {
-        type: Boolean,
-        default: false // Admin can verify NGOs
-    },
-    emailVerified: {
-        type: Boolean,
-        default: false
-    },
-    phoneVerified: {
-        type: Boolean,
-        default: false
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
     }
 });
 

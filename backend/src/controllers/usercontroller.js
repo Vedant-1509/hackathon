@@ -18,16 +18,23 @@ const registerNGO = async (req, res) => {
 
         const newNGO = new NGO({
             fullName,
+            description,
             email,
             phone,
             password: hashedPassword,
             ngoName,
             ngoRegistrationNumber,
             ngoAddress,
-            ngoType,
-            foodTypesNeeded,
-            preferredPickupHours
+            // ngoType,
+            // foodTypesNeeded,
+            // preferredPickupHours,
+            // ngoWebsite,                // optional
+            // preferredPickupLocation,   // optional
+            // verificationDocument,      // required
+            // additionalDocument         // optional
+            // // The fields `isVerified`, `emailVerified`, `phoneVerified`, and `createdAt` will use defaults
         });
+        
 
         await newNGO.save();
 
