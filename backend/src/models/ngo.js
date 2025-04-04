@@ -85,4 +85,4 @@ const ngoSchema = new mongoose.Schema({
 
 
 const NGO = mongoose.model("NGO", ngoSchema);
-export default NGO;
+export {NGO};

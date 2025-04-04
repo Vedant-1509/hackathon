@@ -20,11 +20,6 @@ app.use("/gratia", userRoutes);
 
 
 
-
-
-
-
-
 const start = async () => {
     try {
         const connectionDb = await mongoose.connect(process.env.MONGO_URI, {

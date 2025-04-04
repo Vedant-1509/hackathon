@@ -2,8 +2,8 @@ import httpStatus from "http-status";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { NGO } from "../models/ngo.js";
-import { Restaurant } from "../models/restaurant.js";
-import { Meeting } from "../models/meeting.model.js";
+import { restaurant } from "../models/restaurant.js";
+
 
 const registerNGO = async (req, res) => {
     const { fullName, email, phone, password, ngoName, ngoRegistrationNumber, ngoAddress, ngoType, foodTypesNeeded, preferredPickupHours } = req.body;
@@ -67,19 +67,19 @@ const loginNGO = async (req, res) => {
     }
 };
 
-// Restaurant/Grocery Registration
-const registerRestaurant = async (req, res) => {
+// restaurant/Grocery Registration
+const registerrestaurant = async (req, res) => {
     const { fullName, email, phone, password, businessName, businessRegistrationNumber, businessAddress, foodTypesAvailable, preferredDonationHours } = req.body;
 
     try {
-        const existingBusiness = await Restaurant.findOne({ email });
+        const existingBusiness = await restaurant.findOne({ email });
         if (existingBusiness) {
             return res.status(httpStatus.FOUND).json({ message: "Business already registered" });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const newRestaurant = new Restaurant({
+        const newrestaurant = new restaurant({
             fullName,
             email,
             phone,
@@ -91,7 +91,7 @@ const registerRestaurant = async (req, res) => {
             preferredDonationHours
         });
 
-        await newRestaurant.save();
+        await newrestaurant.save();
 
         res.status(httpStatus.CREATED).json({ message: "Business registered successfully" });
 
@@ -100,15 +100,15 @@ const registerRestaurant = async (req, res) => {
     }
 };
 
-// Restaurant/Grocery Login
-const loginRestaurant = async (req, res) => {
+// restaurant/Grocery Login
+const loginrestaurant = async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
         return res.status(httpStatus.BAD_REQUEST).json({ message: "Please enter both email and password" });
     }
 
     try {
-        const restaurant = await Restaurant.findOne({ email });
+        const restaurant = await restaurant.findOne({ email });
         if (!restaurant) {
             return res.status(httpStatus.NOT_FOUND).json({ message: "Business not found" });
         }
@@ -133,9 +133,9 @@ const loginRestaurant = async (req, res) => {
 export {
     registerNGO,
     loginNGO,
-    registerRestaurant,
-    loginRestaurant,
+    registerrestaurant,
+    loginrestaurant,
 //     getNGOHistory,
-//     getRestaurantHistory,
+//     getrestaurantHistory,
 //     addToHistory
 };
